@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://cdv.xjc.plugin/test"
+        elementFormDefault="qualified">
+
+    <element name="person">
+        <complexType>
+            <sequence>
+                <element name="name" type="string"/>
+                <element name="age" type="int"/>
+                <element name="address" type="string"/>
+            </sequence>
+        </complexType>
+    </element>
+
+</schema>
