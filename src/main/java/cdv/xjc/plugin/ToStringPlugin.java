@@ -1,4 +1,4 @@
-package xjc.custom.plugin;
+package cdv.xjc.plugin;
 
 import com.sun.codemodel.*;
 
