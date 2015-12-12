@@ -37,16 +37,15 @@ public class ConstructorPlugin extends XJCPluginBase {
     private void generateConstructor(JDefinedClass cls) {
         JMethod ctor = cls.constructor(JMod.PUBLIC);
         List<JFieldVar> fields = getFields(cls);
-        Map<String, JVar> params = new HashMap<String, JVar>();
+        Map<String, JVar> params = new HashMap<>();
         for (JFieldVar field : fields) {
             String name = field.name();
             JVar variable = ctor.param(field.type(), name);
             params.put(name, variable);
         }
-        JBlock content = ctor.body();
         for (JFieldVar field : fields) {
             String name = field.name();
-            content.assign(JExpr._this().ref(name), params.get(name));
+            ctor.body().assign(JExpr._this().ref(name), params.get(name));
         }
     }
 

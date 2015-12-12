@@ -46,7 +46,7 @@ public abstract class XJCPluginBase extends Plugin {
     }
 
     protected List<JFieldVar> getFields(JDefinedClass cls) {
-        List<JFieldVar> fields = new ArrayList<JFieldVar>();
+        List<JFieldVar> fields = new ArrayList<>();
         extractFields(cls, fields);
         JClass superclass = cls._extends();
         while (superclass instanceof JDefinedClass) {
