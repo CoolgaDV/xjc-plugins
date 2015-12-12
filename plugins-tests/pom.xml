@@ -51,7 +51,7 @@
                         <configuration>
                             <schemaDirectory>src/test/resources/xsd</schemaDirectory>
                             <extension>true</extension>
-                            <arguments>-Xstr</arguments>
+                            <arguments>-Xctor -Xstr</arguments>
                         </configuration>
                     </execution>
                 </executions>
