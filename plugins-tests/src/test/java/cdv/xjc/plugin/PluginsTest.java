@@ -5,13 +5,16 @@ import org.junit.Test;
 import plugin.xjc.cdv.test.Person;
 
 /**
- * TODO: comment
+ * Tests for features provided by custom plugins to xjc
  *
  * @author Dmitry Coolga
  *         12.12.2015
  */
 public class PluginsTest {
 
+    /**
+     * Test for constructor xjc plugin (flag -Xctor)
+     */
     @Test
     public void testConstructor() {
         Person person = new Person("foo", 42, "bar");
@@ -20,6 +23,9 @@ public class PluginsTest {
         Assert.assertEquals("bar", person.getAddress());
     }
 
+    /**
+     * Test for toString xjc plugin (flag -Xstr)
+     */
     @Test
     public void testToSting() {
         Person person = new Person();

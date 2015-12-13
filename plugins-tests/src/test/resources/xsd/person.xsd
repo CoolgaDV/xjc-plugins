@@ -3,6 +3,7 @@
         targetNamespace="http://cdv.xjc.plugin/test"
         elementFormDefault="qualified">
 
+    <!--Sample element for xjc plugins tests-->
     <element name="person">
         <complexType>
             <sequence>

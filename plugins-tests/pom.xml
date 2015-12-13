@@ -5,7 +5,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>xjc-plugins-tests</artifactId>
-    <version>1.0</version>
+    <name>Set of tests for xjc plugins</name>
 
     <parent>
         <groupId>cdv.xjc</groupId>
@@ -22,6 +22,33 @@
 
     <build>
         <plugins>
+            <!--Generates jaxb beans with custom plugins support-->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>jaxb2-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>generate-test-sources</phase>
+                        <goals>
+                            <goal>xjc</goal>
+                        </goals>
+                        <configuration>
+                            <schemaDirectory>src/test/resources/xsd</schemaDirectory>
+                            <extension>true</extension>
+                            <!--Flags activating custom plugins-->
+                            <arguments>-Xctor -Xstr</arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>cdv.xjc</groupId>
+                        <artifactId>xjc-plugins</artifactId>
+                        <version>${project.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+            <!--Adds generated jaxb beans to compilation-->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
@@ -38,30 +65,6 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>jaxb2-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <phase>generate-test-sources</phase>
-                        <goals>
-                            <goal>xjc</goal>
-                        </goals>
-                        <configuration>
-                            <schemaDirectory>src/test/resources/xsd</schemaDirectory>
-                            <extension>true</extension>
-                            <arguments>-Xctor -Xstr</arguments>
-                        </configuration>
-                    </execution>
-                </executions>
-                <dependencies>
-                    <dependency>
-                        <groupId>cdv.xjc</groupId>
-                        <artifactId>xjc-plugins</artifactId>
-                        <version>${project.version}</version>
-                    </dependency>
-                </dependencies>
             </plugin>
         </plugins>
     </build>
