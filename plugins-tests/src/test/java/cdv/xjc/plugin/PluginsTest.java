@@ -35,4 +35,15 @@ public class PluginsTest {
         Assert.assertEquals("Person{name='foo', age=42, address='bar'}", person.toString());
     }
 
+    /**
+     * Test for fluent API xjc plugin (flag -Xfluent)
+     */
+    @Test
+    public void testFluentApi() {
+        Person person = new Person().name("foo").age(42).address("bar");
+        Assert.assertEquals("foo", person.getName());
+        Assert.assertEquals(42, person.getAge());
+        Assert.assertEquals("bar", person.getAddress());
+    }
+
 }

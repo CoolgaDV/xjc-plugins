@@ -1,2 +1,3 @@
 cdv.xjc.plugin.ToStringPlugin
+cdv.xjc.plugin.FluentApiPlugin
 cdv.xjc.plugin.ConstructorPlugin

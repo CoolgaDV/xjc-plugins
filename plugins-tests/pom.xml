@@ -36,7 +36,7 @@
                             <schemaDirectory>src/test/resources/xsd</schemaDirectory>
                             <extension>true</extension>
                             <!--Flags activating custom plugins-->
-                            <arguments>-Xctor -Xstr</arguments>
+                            <arguments>-Xctor -Xfluent -Xstr</arguments>
                         </configuration>
                     </execution>
                 </executions>
