@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * TODO: write some comments here
+ * XJC plugin providing both constructor with parameter for every field and default constructor
  *
  * @author Dmitry Coolga
  *         31.05.14 19:05
@@ -36,7 +36,7 @@ public class ConstructorPlugin extends XJCPluginBase {
 
     private void generateConstructor(JDefinedClass cls) {
         JMethod ctor = cls.constructor(JMod.PUBLIC);
-        List<JFieldVar> fields = getFields(cls);
+        List<JFieldVar> fields = getInstanceFields(cls);
         Map<String, JVar> params = new HashMap<>();
         for (JFieldVar field : fields) {
             String name = field.name();

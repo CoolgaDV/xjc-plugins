@@ -9,6 +9,7 @@ import org.xml.sax.ErrorHandler;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Super class for XJC plugins
@@ -18,10 +19,26 @@ import java.util.List;
  */
 public abstract class XJCPluginBase extends Plugin {
 
+    /**
+     * Returns plugin option name (without -X prefix)
+     *
+     * @return plugin option name
+     */
     protected abstract String getOption();
 
+    /**
+     * Returns short plugin description
+     *
+     * @return short plugin description
+     */
     protected abstract String getDescription();
 
+    /**
+     * Instrument target jaxb bean class providing additional facilities
+     *
+     * @param cls target jaxb bean class
+     * @param model AST helper
+     */
     protected abstract void makeInstrumentation(JDefinedClass cls, JCodeModel model);
 
     @Override
@@ -45,24 +62,21 @@ public abstract class XJCPluginBase extends Plugin {
         return true;
     }
 
-    protected List<JFieldVar> getFields(JDefinedClass cls) {
+    protected List<JFieldVar> getInstanceFields(JDefinedClass cls) {
         List<JFieldVar> fields = new ArrayList<>();
-        extractFields(cls, fields);
-        JClass superclass = cls._extends();
-        while (superclass instanceof JDefinedClass) {
-            extractFields((JDefinedClass) superclass, fields);
-            superclass = superclass._extends();
+        fields.addAll(collectInstanceFields(cls));
+        JClass superClass = cls._extends();
+        while (superClass instanceof JDefinedClass) {
+            fields.addAll(collectInstanceFields((JDefinedClass) superClass));
+            superClass = superClass._extends();
         }
         return fields;
     }
 
-    protected void extractFields(JDefinedClass cls, List<JFieldVar> fields) {
-        for (final JFieldVar field : cls.fields().values()) {
-            boolean isStatic = (field.mods().getValue() & JMod.STATIC) > 0;
-            if ( ! isStatic) {
-                fields.add(field);
-            }
-        }
+    private List<JFieldVar> collectInstanceFields(JDefinedClass cls) {
+        return cls.fields().values().stream()
+                .filter(field -> (field.mods().getValue() & JMod.STATIC) <= 0)
+                .collect(Collectors.toList());
     }
 
 }

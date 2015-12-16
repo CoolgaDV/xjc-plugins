@@ -15,6 +15,7 @@
     </modules>
 
     <properties>
+
         <jdk.version>1.8</jdk.version>
         <source.encoding>UTF-8</source.encoding>
     </properties>
